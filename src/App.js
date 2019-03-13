@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import TransactionList from './components/TransactionList/TransactionList'
@@ -15,4 +16,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App)
