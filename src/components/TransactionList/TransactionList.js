@@ -19,7 +19,7 @@ class TransactionList extends Component {
     return(
       <div>
         <ul>
-          {transactions.list.map(item => <li key={item.id}>{item.val}</li>)}
+          {transactions.list.map(item => <li key={item.id}>{item.value}</li>)}
         </ul>
         <button onClick={this.goToAddTransaction}>Add transaction</button>
       </div>
