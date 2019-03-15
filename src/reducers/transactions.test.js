@@ -26,7 +26,7 @@ describe('transactions reducer', () => {
     expect(transactions({}, receiveTransactoinsAction)).toEqual(expectedResult);
   })
 
-  it('sould add a new transaction', () => {
+  it('should add a new transaction', () => {
     const newTransactionMock = {
       description: "test2",
       value: "2020",
@@ -42,7 +42,7 @@ describe('transactions reducer', () => {
       .toEqual(expectedResult);
   })
 
-  it('sould order transactions by date', () => {
+  it('should order transactions by date', () => {
     const orderTransactionsAction = {
       type: ORDER_TRANSACTIONS_BY_DATE,
       transactions: JSON.stringify(mockTransactionList),
