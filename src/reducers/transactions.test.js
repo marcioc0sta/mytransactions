@@ -47,13 +47,11 @@ describe('transactions reducer', () => {
       type: ORDER_TRANSACTIONS_BY_DATE,
       transactions: JSON.stringify(mockTransactionList),
     }
-
     const expectedResult = {
       list: mockTransactionList.sort((a, b) => {
         return new Date(b.timestamp) - new Date(a.timestamp)
       }),
     }
-
     expect(transactions({list: [...mockTransactionList]}, orderTransactionsAction))
     .toEqual(expectedResult);
   })

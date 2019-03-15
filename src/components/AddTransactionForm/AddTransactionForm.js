@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { guid } from '../../helpers/generateTransactionId'
 import { connect } from 'react-redux'
 import { handleSaveTransaction } from '../../actions/transactions'
+import NumberFormat from 'react-number-format'
 
 class AddTransactionForm extends Component {
   state = {
     description: '',
-    value: 0,
+    value: '',
     timestamp: Date.now(),
     id: guid(),
   }
@@ -42,11 +43,14 @@ class AddTransactionForm extends Component {
             value={description}
             onChange={this.handleChange('description')}
           />
-          <input
-            type="number"
-            step="any"
+          <NumberFormat
+            isNumericString
             required
             placeholder="value"
+            fixedDecimalScale
+            decimalScale={2}
+            thousandSeparator="."
+            decimalSeparator=","
             onChange={this.handleChange('value')}
           />
           <button type="submit">Save transaction</button>

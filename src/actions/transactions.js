@@ -29,7 +29,9 @@ export const handleReceiveTransactions = () => {
   const transactionList = getTransactionList()
   return dispatch => {
     dispatch(receiveTransactions(transactionList))
-    dispatch(orderPostsByDate(transactionList))
+    if(transactionList !== null) {
+      dispatch(orderPostsByDate(transactionList))
+    }
   }
 }
 
