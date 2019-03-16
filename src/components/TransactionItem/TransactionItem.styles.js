@@ -12,7 +12,8 @@ const styles = {
   card: {
     width: '30%',
     padding: 10,
-    marginRight: 20,
+    marginLeft: 10,
+    marginRight: 10,
     marginBottom: 20,
     borderLeftStyle: 'solid',
     borderLeftWidth: '3px',
