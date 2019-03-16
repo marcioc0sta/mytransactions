@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-import styles from './Header.styles'
+import { styles } from './Header.styles'
 
 const Header = props => {
   const { classes } = props;

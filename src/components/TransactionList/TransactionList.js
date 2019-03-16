@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleReceiveTransactions } from '../../actions/transactions'
 import { withRouter } from 'react-router-dom'
-import moment from 'moment'
-require('moment/locale/pt-br.js')
-moment.locale('pt-BR')
+
+import TransactionItem from '../TransactionItem/TransactionItem'
+import { handleReceiveTransactions } from '../../actions/transactions'
+
+import { Container, TransactionsWrapper } from './Transactionlist.styles'
 
 class TransactionList extends Component {
   componentDidMount() {
@@ -21,16 +22,17 @@ class TransactionList extends Component {
 
   render(){
     const { transactions } = this.props
-    const dateFormat = "D [de] MMMM YYYY, HH:mm:ss"
 
     return(
-      <div>
-        <ul>
-          {transactions.list.map(item => <li key={item.id}>{item.value} <small> {moment(item.timestamp).format(dateFormat)}</small></li>)}
-        </ul>
+      <Container>
+        <TransactionsWrapper>
+          {transactions.list.map(item => (
+            <TransactionItem key={item.id} transaction={item} />
+          ))}
+        </TransactionsWrapper>
         <p>total: {this.toRealCurrencyString(transactions.total)}</p>
         <button onClick={this.goToAddTransaction}>Adicionar Transação</button>
-      </div>
+      </Container>
     )
   }
 }

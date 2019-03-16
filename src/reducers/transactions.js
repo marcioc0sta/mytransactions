@@ -1,4 +1,6 @@
-import { 
+import { currencyStringToNumber } from '../helpers/currencyStringToNumber'
+
+import {
   RECEIVE_ALL_TRANSACTIONS,
   SAVE_TRANSACTION,
   ORDER_TRANSACTIONS_BY_DATE,
@@ -25,14 +27,16 @@ export default function transactions(state = initialState, action) {
         ...state,
         list: [...orderedByTime],
       }
-    case CALCULATE_TOTAL_OF_TRANSACTIONS: 
-      const values = state.list.map(value => (
-        parseFloat(value.value.replace(',','.'))
-      ))
-    return {
-      ...state,
-      total: values.reduce((part_sum, a) => part_sum + a),
-    }
+    case CALCULATE_TOTAL_OF_TRANSACTIONS:
+      const values = state.list.map(transaction => {
+        return (
+          currencyStringToNumber(transaction.value)
+        )
+      })
+      return {
+        ...state,
+        total: values.reduce((part_sum, a) => part_sum + a),
+      }
     case SAVE_TRANSACTION:
       const currentList = state.list
       const updatedList = currentList.concat(action.transaction)
