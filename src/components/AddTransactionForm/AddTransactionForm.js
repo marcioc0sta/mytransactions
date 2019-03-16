@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
 import { guid } from '../../helpers/generateTransactionId'
 import { connect } from 'react-redux'
+import { ValidatorForm } from 'react-form-validator-core'
+
 import { handleSaveTransaction } from '../../actions/transactions'
-import NumberFormat from 'react-number-format'
+import TextInputValidator from '../TextInputValidator/TextInputValidator'
+import NumberInputValidator from '../NumberInputValidator/NumberInputValidator'
+import { VALIDATION_MESSAGES } from '../../helpers/validationMessages'
+
+ValidatorForm.addValidationRule('isValueValid', value => {
+  if (parseInt(value) === 0) {
+      return false;
+  }
+  return true;
+})
 
 class AddTransactionForm extends Component {
   state = {
@@ -23,39 +34,49 @@ class AddTransactionForm extends Component {
     })
   }
 
-  handleSubmit = e => {
-    e.preventDefault()
+  handleSubmit = () => {
     const { dispatch } = this.props
     const transaction = this.state
     dispatch(handleSaveTransaction(transaction))
   }
 
+  isValueValid = () => {
+    const { value } = this.state
+    if(parseInt(value) === 0) return false
+    return
+  }
+
   render(){
-    const { description } = this.state
+    const { description, value } = this.state
 
     return(
       <div>
-        <form onSubmit={e => this.handleSubmit(e)}>
-          <input 
+        <ValidatorForm ref="form" onSubmit={this.handleSubmit}>
+          <TextInputValidator 
             type="text" 
-            required 
             placeholder="Transaction description"
             value={description}
+            validators={['required']}
+            errorMessages={[VALIDATION_MESSAGES.requiredField]}
             onChange={this.handleChange('description')}
           />
-          <NumberFormat
-            isNumericString
-            required
+          <NumberInputValidator
             placeholder="value"
-            fixedDecimalScale
             decimalScale={2}
+            fixedDecimalScale
             thousandSeparator="."
             decimalSeparator=","
+            value={value}
+            validators={['required', 'isValueValid']}
+            errorMessages={[
+              VALIDATION_MESSAGES.requiredField,
+              VALIDATION_MESSAGES.transactionZero,
+            ]}
             onChange={this.handleChange('value')}
           />
-          <button type="submit">Save transaction</button>
-        </form>
-        <button onClick={this.goToList}>Back to list</button>
+          <button type="submit">Salvar Transação</button>
+        </ValidatorForm>
+        <button onClick={this.goToList}>Voltar para lista</button>
       </div>
     )
   }

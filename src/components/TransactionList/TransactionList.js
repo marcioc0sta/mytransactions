@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { handleReceiveTransactions } from '../../actions/transactions'
 import { withRouter } from 'react-router-dom'
 import moment from 'moment'
+require('moment/locale/pt-br.js')
+moment.locale('pt-BR')
 
 class TransactionList extends Component {
   componentDidMount() {
@@ -17,13 +19,14 @@ class TransactionList extends Component {
 
   render(){
     const { transactions } = this.props
-    const dateFormat = "MMMM Do YYYY, h:mm:ss a"
+    const dateFormat = "D [de] MMMM YYYY, HH:mm:ss"
+
     return(
       <div>
         <ul>
           {transactions.list.map(item => <li key={item.id}>{item.value} <small> {moment(item.timestamp).format(dateFormat)}</small></li>)}
         </ul>
-        <button onClick={this.goToAddTransaction}>Add transaction</button>
+        <button onClick={this.goToAddTransaction}>Adicionar Transação</button>
       </div>
     )
   }
