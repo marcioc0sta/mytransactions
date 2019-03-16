@@ -5,7 +5,11 @@ import { withRouter } from 'react-router-dom'
 import TransactionItem from '../TransactionItem/TransactionItem'
 import { handleReceiveTransactions } from '../../actions/transactions'
 
-import { Container, TransactionsWrapper } from './Transactionlist.styles'
+import { 
+  Container,
+  TransactionsWrapper, 
+  TotalContainer,
+} from './Transactionlist.styles'
 
 class TransactionList extends Component {
   componentDidMount() {
@@ -30,8 +34,11 @@ class TransactionList extends Component {
             <TransactionItem key={item.id} transaction={item} />
           ))}
         </TransactionsWrapper>
-        <p>total: {this.toRealCurrencyString(transactions.total)}</p>
-        <button onClick={this.goToAddTransaction}>Adicionar Transação</button>
+        <hr/>
+        <TotalContainer>
+          <p>total: {this.toRealCurrencyString(transactions.total)}</p>
+          <button onClick={this.goToAddTransaction}>Adicionar Transação</button>
+        </TotalContainer>
       </Container>
     )
   }

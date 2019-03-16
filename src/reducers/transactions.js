@@ -28,14 +28,10 @@ export default function transactions(state = initialState, action) {
         list: [...orderedByTime],
       }
     case CALCULATE_TOTAL_OF_TRANSACTIONS:
-      const values = state.list.map(transaction => {
-        return (
-          currencyStringToNumber(transaction.value)
-        )
-      })
+      const values = state.list.map(({value}) => currencyStringToNumber(value))
       return {
         ...state,
-        total: values.reduce((part_sum, a) => part_sum + a),
+        total: values.reduce((initialVal, nextItem) => initialVal + nextItem),
       }
     case SAVE_TRANSACTION:
       const currentList = state.list

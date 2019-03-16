@@ -5,8 +5,14 @@ const Container = styled.div`
 `
 const TransactionsWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
 `
 
-export { Container, TransactionsWrapper }
+const TotalContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+`
+
+export { Container, TransactionsWrapper, TotalContainer }

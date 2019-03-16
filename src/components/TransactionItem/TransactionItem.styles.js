@@ -1,10 +1,24 @@
+import styled from 'styled-components'
+import red from '@material-ui/core/colors/red'
+import lightGreen from '@material-ui/core/colors/lightGreen'
+
+const TransactionValue = styled.div`
+  font-family: 'PT Sans';
+  color: ${props => props.status === 'negative' ? red[700] : lightGreen[700]}
+`
+
 const styles = {
   card: {
     width: '30%',
     padding: 10,
     marginRight: 20,
     marginBottom: 20,
-
+    borderLeftStyle: 'solid',
+    borderLeftWidth: '3px',
+    borderLeftColor: lightGreen[700],
+  },
+  cardNegative: {
+    borderLeftColor: red[700],
   },
   title: {
     fontSize: 24,
@@ -21,4 +35,4 @@ const styles = {
   }
 };
 
-export { styles }
+export { styles, TransactionValue }
