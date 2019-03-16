@@ -17,6 +17,8 @@ class TransactionList extends Component {
     history.push('/add-transaction')
   }
 
+  toRealCurrencyString = num => `R$ ${num.toLocaleString('pt-BR')}`
+
   render(){
     const { transactions } = this.props
     const dateFormat = "D [de] MMMM YYYY, HH:mm:ss"
@@ -26,6 +28,7 @@ class TransactionList extends Component {
         <ul>
           {transactions.list.map(item => <li key={item.id}>{item.value} <small> {moment(item.timestamp).format(dateFormat)}</small></li>)}
         </ul>
+        <p>total: {this.toRealCurrencyString(transactions.total)}</p>
         <button onClick={this.goToAddTransaction}>Adicionar Transação</button>
       </div>
     )

@@ -5,7 +5,6 @@ import NumberFormat from 'react-number-format'
 class NumberInputValidator extends ValidatorComponent {
   render() {
     const { errorMessages, validators, requiredError, validatorListener, ...rest } = this.props;
-    console.log(this.state)
     return (
       <div>
         <NumberFormat

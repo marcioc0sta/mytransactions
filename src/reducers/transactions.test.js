@@ -3,6 +3,7 @@ import {
   RECEIVE_ALL_TRANSACTIONS,
   SAVE_TRANSACTION,
   ORDER_TRANSACTIONS_BY_DATE,
+  CALCULATE_TOTAL_OF_TRANSACTIONS,
 } from '../actions/transactions'
 
 const mockTransactionList = [
@@ -13,7 +14,7 @@ const mockTransactionList = [
 
 describe('transactions reducer', () => {
   it('should return the initial state', () => {
-    const expectedResult = {"list": []}
+    const expectedResult = {"list": [], "total": ''}
     expect(transactions(undefined, {})).toEqual(expectedResult)
   })
 
@@ -22,7 +23,7 @@ describe('transactions reducer', () => {
       type: RECEIVE_ALL_TRANSACTIONS,
       transactions: JSON.stringify(mockTransactionList),
     }
-    const expectedResult =  {"list": [...mockTransactionList]}
+    const expectedResult =  {"list": [...mockTransactionList],}
     expect(transactions({}, receiveTransactoinsAction)).toEqual(expectedResult);
   })
 
@@ -37,7 +38,7 @@ describe('transactions reducer', () => {
       type: SAVE_TRANSACTION,
       transaction: newTransactionMock,
     }
-    const expectedResult =  {"list": [...mockTransactionList, newTransactionMock]}
+    const expectedResult =  {"list": [...mockTransactionList, newTransactionMock],}
     expect(transactions({list: [...mockTransactionList]}, saveTransactionsAction))
       .toEqual(expectedResult);
   })
@@ -53,6 +54,21 @@ describe('transactions reducer', () => {
       }),
     }
     expect(transactions({list: [...mockTransactionList]}, orderTransactionsAction))
+    .toEqual(expectedResult);
+  })
+
+  it('should calculate total of transactions', () => {
+    const caltulateTotalAction = {
+      type: CALCULATE_TOTAL_OF_TRANSACTIONS,
+      transactions: JSON.stringify(mockTransactionList),
+    }
+
+    const expectedResult = {
+      list: [...mockTransactionList],
+      total: 77.50
+    }
+
+    expect(transactions({list: [...mockTransactionList]}, caltulateTotalAction))
     .toEqual(expectedResult);
   })
 })

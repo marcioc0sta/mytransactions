@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { guid } from '../../helpers/generateTransactionId'
 import { connect } from 'react-redux'
 import { ValidatorForm } from 'react-form-validator-core'
 
@@ -19,8 +18,6 @@ class AddTransactionForm extends Component {
   state = {
     description: '',
     value: '',
-    timestamp: Date.now(),
-    id: guid(),
   }
 
   goToList = () => {
@@ -38,6 +35,10 @@ class AddTransactionForm extends Component {
     const { dispatch } = this.props
     const transaction = this.state
     dispatch(handleSaveTransaction(transaction))
+    this.setState({
+      description: '',
+      value: '',
+    })
   }
 
   isValueValid = () => {
