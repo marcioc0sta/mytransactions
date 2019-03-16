@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
 
 import TransactionItem from '../TransactionItem/TransactionItem'
 import { handleReceiveTransactions } from '../../actions/transactions'
@@ -9,6 +10,8 @@ import {
   Container,
   TransactionsWrapper, 
   TotalContainer,
+  TotalValueText,
+  TotalValue,
 } from './Transactionlist.styles'
 
 class TransactionList extends Component {
@@ -24,6 +27,11 @@ class TransactionList extends Component {
 
   toRealCurrencyString = num => `R$ ${num.toLocaleString('pt-BR')}`
 
+  getTransactionStatus = val => {
+    if(parseFloat(val) < 0) return 'negative'
+    return 'positive'
+  }
+
   render(){
     const { transactions } = this.props
 
@@ -34,10 +42,20 @@ class TransactionList extends Component {
             <TransactionItem key={item.id} transaction={item} />
           ))}
         </TransactionsWrapper>
-        <hr/>
-        <TotalContainer>
-          <p>total: {this.toRealCurrencyString(transactions.total)}</p>
-          <button onClick={this.goToAddTransaction}>Adicionar Transação</button>
+        <TotalContainer status={this.getTransactionStatus(transactions.total)}>
+          <Button 
+            color="primary"
+            onClick={this.goToAddTransaction}
+            variant="contained"
+          >
+            Adicionar Transação
+          </Button>
+          <TotalValueText>
+            Seu saldo:
+            <TotalValue status={this.getTransactionStatus(transactions.total)}>
+              {this.toRealCurrencyString(transactions.total)}
+            </TotalValue>
+          </TotalValueText>
         </TotalContainer>
       </Container>
     )

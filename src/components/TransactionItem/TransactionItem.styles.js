@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import red from '@material-ui/core/colors/red'
 import lightGreen from '@material-ui/core/colors/lightGreen'
+import grey from '@material-ui/core/colors/grey'
 
 const TransactionValue = styled.div`
   font-family: 'PT Sans';
@@ -22,6 +23,10 @@ const styles = {
   },
   title: {
     fontSize: 24,
+    borderBottomStyle: 'solid',
+    borderBottomWidth: '1px',
+    borderBottomColor: grey[200],
+    marginBottom: 10,
   },
   value: {
     fontSize: 30,

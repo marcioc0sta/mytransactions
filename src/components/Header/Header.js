@@ -1,10 +1,12 @@
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import { withRouter } from 'react-router-dom'
 
-import { styles } from './Header.styles'
+import { styles, HeaderTitle } from './Header.styles'
+
+const goToHome = props => props.history.push('/')
 
 const Header = props => {
   const { classes } = props;
@@ -13,13 +15,16 @@ const Header = props => {
     <div className={classes.root}>
       <AppBar position="static" color="primary">
         <Toolbar>
-          <Typography variant="h6" color="inherit">
+          <HeaderTitle 
+            onClick={() => goToHome(props)}
+            variant="h6" color="inherit"
+          >
             Minhas transações
-        </Typography>
+        </HeaderTitle>
         </Toolbar>
       </AppBar>
     </div>
   )
 }
 
-export default withStyles(styles)(Header)
+export default withRouter(withStyles(styles)(Header))
