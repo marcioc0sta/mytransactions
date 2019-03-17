@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ValidatorForm } from 'react-form-validator-core'
 import Button from '@material-ui/core/Button'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import TextInputValidator from '../TextInputValidator/TextInputValidator'
 import NumberInputValidator from '../NumberInputValidator/NumberInputValidator'
@@ -34,6 +36,14 @@ class AddTransactionForm extends Component {
     })
   }
 
+  notify = () => {
+    toast.success("Sua transação foi salva!", {
+      position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 3000,
+      hideProgressBar: true,
+    });
+  };
+
   handleSubmit = () => {
     const { dispatch } = this.props
     const transaction = this.state
@@ -42,6 +52,7 @@ class AddTransactionForm extends Component {
       description: '',
       value: '',
     })
+    this.notify()
   }
 
   isValueValid = () => {
@@ -101,6 +112,7 @@ class AddTransactionForm extends Component {
             </Button>
           </FormActions>
         </ValidatorForm>
+        <ToastContainer />
       </FormContainer>
     )
   }
