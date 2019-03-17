@@ -17,7 +17,7 @@ const Header = props => {
         <Toolbar>
           <HeaderTitle 
             onClick={() => goToHome(props)}
-            variant="h6" color="inherit"
+            color="inherit"
           >
             Minhas transações
         </HeaderTitle>

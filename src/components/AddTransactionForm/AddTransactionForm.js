@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ValidatorForm } from 'react-form-validator-core'
+import Button from '@material-ui/core/Button'
 
-import { handleSaveTransaction } from '../../actions/transactions'
 import TextInputValidator from '../TextInputValidator/TextInputValidator'
 import NumberInputValidator from '../NumberInputValidator/NumberInputValidator'
-import { VALIDATION_MESSAGES } from '../../helpers/validationMessages'
+import { handleSaveTransaction } from '../../actions/transactions'
+import { VALIDATION_MESSAGES, TOOLTIP_MESSAGES } from '../../helpers/formMessages'
+
+import { FormContainer, FormActions, styles } from './AddTransactionForm.styles'
 
 ValidatorForm.addValidationRule('isValueValid', value => {
   if (parseInt(value) === 0) {
-      return false;
+    return false;
   }
   return true;
 })
@@ -43,26 +46,32 @@ class AddTransactionForm extends Component {
 
   isValueValid = () => {
     const { value } = this.state
-    if(parseInt(value) === 0) return false
+    if (parseInt(value) === 0) return false
     return
   }
 
-  render(){
+  render() {
     const { description, value } = this.state
 
-    return(
-      <div>
-        <ValidatorForm ref="form" onSubmit={this.handleSubmit}>
-          <TextInputValidator 
-            type="text" 
-            placeholder="Transaction description"
+    return (
+      <FormContainer>
+        <ValidatorForm
+          style={styles.form}
+          ref="form"
+          onSubmit={this.handleSubmit}
+        >
+          <TextInputValidator
+            type="text"
+            placeholder="Descrição"
+            tooltipmessage={TOOLTIP_MESSAGES.description}
             value={description}
             validators={['required']}
             errorMessages={[VALIDATION_MESSAGES.requiredField]}
             onChange={this.handleChange('description')}
           />
           <NumberInputValidator
-            placeholder="value"
+            placeholder="Valor"
+            tooltipmessage={TOOLTIP_MESSAGES.value}
             decimalScale={2}
             fixedDecimalScale
             thousandSeparator="."
@@ -75,10 +84,24 @@ class AddTransactionForm extends Component {
             ]}
             onChange={this.handleChange('value')}
           />
-          <button type="submit">Salvar Transação</button>
+          <FormActions>
+            <Button
+              color="default"
+              variant="contained"
+              onClick={this.goToList}
+            >
+              Voltar para lista
+            </Button>
+            <Button
+              color="primary"
+              variant="contained"
+              type="submit"
+            >
+              Salvar Transação
+            </Button>
+          </FormActions>
         </ValidatorForm>
-        <button onClick={this.goToList}>Voltar para lista</button>
-      </div>
+      </FormContainer>
     )
   }
 }
