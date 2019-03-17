@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   list: [],
-  total: '',
+  total: 0,
 }
 
 export default function transactions(state = initialState, action) {

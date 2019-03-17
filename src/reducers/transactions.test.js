@@ -14,7 +14,7 @@ const mockTransactionList = [
 
 describe('transactions reducer', () => {
   it('should return the initial state', () => {
-    const expectedResult = {"list": [], "total": ''}
+    const expectedResult = {"list": [], "total": 0}
     expect(transactions(undefined, {})).toEqual(expectedResult)
   })
 
