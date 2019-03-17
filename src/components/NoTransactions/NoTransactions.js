@@ -17,7 +17,7 @@ const NoTransactions = props => {
   return (
     <NoTransactionsContainer>
       <Row>
-        <i class="fas fa-exclamation-circle"></i>
+        <i className="fas fa-exclamation-circle"></i>
         <NoTransactionsText>Você não tem nenhuma transação</NoTransactionsText>
       </Row>
       <Row>

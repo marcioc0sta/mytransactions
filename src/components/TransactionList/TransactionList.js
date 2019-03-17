@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button'
 import NoTransactions from '../NoTransactions/NoTransactions'
 import TransactionItem from '../TransactionItem/TransactionItem'
 import { handleReceiveTransactions } from '../../actions/transactions'
+import { numberToCurrencyString } from '../../helpers/numberToCurrencyString'
 
 import {
   Container,
@@ -26,7 +27,7 @@ class TransactionList extends Component {
     history.push('/add-transaction')
   }
 
-  toRealCurrencyString = num => `R$ ${num.toLocaleString('pt-BR')}`
+  toRealCurrencyString = num => `R$ ${numberToCurrencyString(num)}`
 
   getTransactionStatus = val => {
     if (parseFloat(val) < 0) return 'negative'
