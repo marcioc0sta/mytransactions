@@ -11,7 +11,6 @@ import {
 
 const CategorizedTransactions = props => {
   const { classes, transactionList, category } = props
-  console.log(transactionList)
   return (
     <Section>
       <Typography className={classes.title} color="textSecondary">
