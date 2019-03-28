@@ -15,7 +15,7 @@ const receiveTransactions = transactions => {
   }
 }
 
-const orderPostsByDate = transactions => {
+export const orderPostsByDate = transactions => {
   return {
     type: ORDER_TRANSACTIONS_BY_DATE,
     transactions,
@@ -36,14 +36,14 @@ const calculateTotalOfTransactions = transactions => {
   }
 }
 
-const orderTransactionsByMonth = transactions => {
+export const orderTransactionsByMonth = transactions => {
   return {
     type: ORDERED_BY_MONTH,
     transactions,
   }
 }
 
-const orderTransactionsByYear = transactions => {
+export const orderTransactionsByYear = transactions => {
   return {
     type: ORDERED_BY_YEAR,
     transactions,
@@ -57,8 +57,6 @@ export const handleReceiveTransactions = () => {
     if (transactionList !== null) {
       dispatch(orderPostsByDate(transactionList))
       dispatch(calculateTotalOfTransactions(transactionList))
-      dispatch(orderTransactionsByMonth(transactionList))
-      dispatch(orderTransactionsByYear(transactionList))
     }
   }
 }

@@ -14,6 +14,7 @@ const initialState = {
   list: [],
   total: 0,
   orderedByMonth: {},
+  orderedByYear:{},
 }
 
 export default function transactions(state = initialState, action) {
